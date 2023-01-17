@@ -1,0 +1,28 @@
+body{
+    background-color: rgb(187, 230, 239);
+}
+h1{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+}
+/* #line{
+    background-color: rgb(149, 177, 188);
+    height: 2px;
+ } */
+
+#Job-portal{
+    
+    background-color: rgba(177, 209, 216, 0.9);
+}
+h2{
+    font-weight: bold;
+    margin-left: 10px;
+}
+/* button{
+    text-align: center;
+    background-color: rgb(231, 248, 169);
+    font-size: 20px;
+    border-radius: 10px;
+} */
