@@ -1,0 +1,109 @@
+body{
+    background-color: antiquewhite;
+}
+/*  main body */
+.details-div{
+    display: flex;
+    justify-content: center;
+    /* position: relative; */
+    background-image: url(resources/Job-Board-Header-Background.png );
+    background-size: cover;
+    height: 100vh; 
+}
+.details-div p,h1{
+    margin-top: 30px;
+    text-align: center;
+}
+
+#About,#SignUp{
+    width:50%;
+    /* position: absolute; */
+    font-size: 18px;
+    padding: 30px;
+    margin: 20px;
+    background: rgba(256,256,256,0.3);
+    border-radius: 10px;
+
+}
+
+#About:hover,#SignUp:hover{
+    box-shadow: 7px 7px 10px  rgb(42, 55, 70);
+  
+}
+
+.line{
+    background-color: rgb(167, 188, 196);
+    height: 2px;
+}
+
+/* nav bar */
+
+
+.nav-design{
+    display: flex;
+    justify-content: space-between;
+}
+#list-item-design{
+    font-size: 16px;
+    display: flex;
+    justify-content: right;
+    border-radius: 5px;
+    padding:10px 20px;
+    margin: 0px 30px 0px;
+  background: rgb(197, 220, 243);
+  /* box-shadow: 7px 7px 10px rgb(87, 28, 91); */
+  box-shadow: 7px 7px 10px  rgb(158, 191, 229);
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    /* justify-content: right; */
+  }
+  
+  #head-color{
+    color:rgb(78, 149, 230);
+    font-size: 30px;
+  }
+  span{
+    color:rgb(26, 65, 95);
+  }
+
+.form-design{
+    display: flex;
+    justify-content: center;
+}
+#label-id{
+    padding:30px 0px ;
+    margin: 30px 0px;
+}
+button{
+    text-align: center;
+}
+.label-design{
+    padding-left: 25px;
+    font-size: 25px;
+    margin-top:20px ;
+    margin-bottom: 10px;
+}
+#fname{
+    margin:15px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: #ececec;
+    box-shadow: 7px 7px 10px  rgb(202, 202,202);
+}
+
+/* Contact Section */
+
+#contact-div{
+    background-color: rgb(166, 220, 237);
+    padding:100px;
+    text-align:center;
+    margin-top: 15px;
+}
+
+.contact-div-column{
+        padding:3% 2%;
+} 
+     
