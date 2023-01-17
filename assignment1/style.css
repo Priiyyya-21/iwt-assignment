@@ -81,8 +81,8 @@ button{
     text-align: center;
 }
 .label-design{
-    padding-left: 25px;
-    font-size: 25px;
+    
+    font-size: auto;
     margin-top:20px ;
     margin-bottom: 10px;
 }
@@ -93,17 +93,50 @@ button{
     background-color: #ececec;
     box-shadow: 7px 7px 10px  rgb(202, 202,202);
 }
+#pswd
+{
+    border-radius: 3px;
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
+    height: 20px;
+}
+
+.submit-button{
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn{
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: rgba(177, 209, 216, 0.9);
+}
+
+.submit-btn:hover{
+    background-color: rgba(198, 198, 198, 0.9);
+    color: rgb(21, 72, 88);
+}
 
 /* Contact Section */
 
 #contact-div{
-    background-color: rgb(166, 220, 237);
+    background-color: rgb(138, 171, 181);
     padding:100px;
-    text-align:center;
-    margin-top: 15px;
+    display: flex;
+    margin-top: 10px;
 }
 
-.contact-div-column{
-        padding:3% 2%;
-} 
-     
+#Mail,#Address{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+#CareerPath{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+   

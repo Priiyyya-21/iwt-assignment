@@ -20,9 +20,50 @@ h2{
     font-weight: bold;
     margin-left: 10px;
 }
-/* button{
+p{
+    margin-left: 20px;
+    font-size: 21px;
+}
+ button{
     text-align: center;
     background-color: rgb(231, 248, 169);
     font-size: 20px;
     border-radius: 10px;
-} */
+} 
+
+li{
+    font-size: 21px;
+}
+#Job-type{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#job-form{
+    padding: 20px;
+    width: 50%;
+    background-color: rgb(225, 248, 255);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.submit-button{
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn{
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: rgba(177, 209, 216, 0.9);
+}
+
+.submit-btn:hover{
+    background-color: rgba(198, 198, 198, 0.9);
+    color: rgb(21, 72, 88);
+}
+
