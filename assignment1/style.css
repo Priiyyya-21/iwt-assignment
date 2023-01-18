@@ -129,14 +129,44 @@ button{
     margin-top: 10px;
 }
 
-#Mail,#Address{
-    width: 30%;
-    display: flex;
-    justify-content: center;
+#Mail{
+   
+    width: 50%;
+    /* background: #ececec; */
+    margin-left: 100px;
 }
-#CareerPath{
+
+#Address{
+    width: 50%;
+    /* background: #ececec; */
+}
+ 
+
+
+#Address p{
+    margin-top: 70px;
+    margin-right: 30px;
+    /* background: #ececec; */
+    /* margin-left: 20px; */
+}
+/* #CareerPath{
     width: 40%;
     display: flex;
     justify-content: center;
+} */
+#Mail p{
+    margin-top: 70px;
+    margin-right: 30px;
+    /* margin-left: 20px; */
+    /* padding-left: 20px; */
 }
-   
+
+
+
+.footer{
+    background-color: rgb(138, 171, 181);
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    font-size: 16px;
+}
