@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot Product</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label{
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        button {
+            padding: 7px 20px;
+            font-size: 16px;
+            background:black;
+            color: white;
+            cursor: pointer;
+            margin: 13px;
+        }
+
+        button:hover {
+            background: gray;
+        }
+        #result {
+            margin-top: 50px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dot Product Calculator</h1>
+        <div class="form">
+            <label for="vector1">Vector 1:</label>
+            <input type="text" id="vector1" name="vector1" placeholder="Enter values separated by comma: ">
+          
+            <label for="vector2">Vector 2:</label>
+            <input type="text" id="vector2" name="vector2" placeholder="Enter values separated by comma: ">
+     
+            <button id="calculate">Calculate Dot Product</button>
+        </div>
+        <br>
+        <div id="result">
+            <h2>Result: <span id="dot-product"></span></h2>
+        </div>
+    </div>
+    <script>
+        const calculateBtn = document.getElementById("calculate");
+        const vector1Input = document.getElementById("vector1");
+        const vector2Input = document.getElementById("vector2");
+        const dotProduct = document.getElementById("dot-product");
+
+        calculateBtn.addEventListener("click", () => {
+            const vector1 = vector1Input.value.split(",").map(Number);
+            const vector2 = vector2Input.value.split(",").map(Number);
+            let result = 0;
+            for (let i = 0; i < vector1.length; i++) {
+                result += vector1[i] * vector2[i];
+            }
+            dotProduct.innerHTML = result;
+        });
+
+    </script>
+</body>
+
+</html>
