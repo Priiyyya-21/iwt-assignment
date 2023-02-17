@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrix Operation</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      textarea {
+        margin: 20px;
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+        height: 80px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: black;
+        color: white;
+        cursor: pointer;
+        margin: 13px;
+      }
+
+      button:hover {
+        background: gray;
+      }
+      #result {
+        margin-top: 50px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Matrix Calculator</h1>
+      <div class="form">
+        <label for="matrix1">Matrix 1:</label>
+        <textarea
+          id="matrix1"
+          name="matrix1"
+          rows="5"
+          placeholder="Enter values separated by space and line break: "
+        ></textarea>
+        <label for="matrix2">Matrix 2:</label>
+        <textarea
+          id="matrix2"
+          name="matrix2"
+          rows="5"
+          placeholder="Enter values separated by space and line break: "
+        ></textarea>
+        <div>
+          <button id="add">Add</button>
+          <button id="subtract">Subtract</button>
+          <button id="multiply">Multiply</button>
+        </div>
+      </div>
+
+      <div id="result">
+        <h2>Result:</h2>
+        <textarea id="result-matrix" rows="5" readonly></textarea>
+      </div>
+    </div>
+
+    <script>
+      const addBtn = document.getElementById("add");
+      const subtractBtn = document.getElementById("subtract");
+      const multiplyBtn = document.getElementById("multiply");
+      const matrix1Input = document.getElementById("matrix1");
+      const matrix2Input = document.getElementById("matrix2");
+      const resultMatrix = document.getElementById("result-matrix");
+
+      const parseMatrix = (matrix) => {
+        return matrix.split("\n").map((row) => row.split(" ").map(Number));
+      };
+
+      const addMatrices = (matrix1, matrix2) => {
+        return matrix1.map((row, i) =>
+          row.map((value, j) => value + matrix2[i][j])
+        );
+      };
+
+      const subtractMatrices = (matrix1, matrix2) => {
+        return matrix1.map((row, i) =>
+          row.map((value, j) => value - matrix2[i][j])
+        );
+      };
+
+      const multiplyMatrices = (matrix1, matrix2) => {
+        if (matrix1[0].length !== matrix2.length) {
+          throw new Error(
+            "The number of columns in the first matrix must be equal to the number of rows in the second matrix"
+          );
+        }
+        let result = [];
+        for (let i = 0; i < matrix1.length; i++) {
+          result[i] = [];
+          for (let j = 0; j < matrix2[0].length; j++) {
+            let sum = 0;
+            for (let k = 0; k < matrix1[0].length; k++) {
+              sum += matrix1[i][k] * matrix2[k][j];
+            }
+            result[i][j] = sum;
+          }
+        }
+        return result;
+      };
+
+      const updateResult = (matrix) => {
+        resultMatrix.value = matrix.map((row) => row.join(" ")).join("\n");
+      };
+
+      const calculate = (matrix1, matrix2, operation) => {
+        try {
+          matrix1 = parseMatrix(matrix1);
+          matrix2 = parseMatrix(matrix2);
+
+          if (
+            matrix1.length !== matrix2.length ||
+            matrix1[0].length !== matrix2[0].length
+          ) {
+            throw new Error("Matrices have different dimensions!");
+          }
+
+          let result = null;
+          switch (operation) {
+            case "add":
+              result = addMatrices(matrix1, matrix2);
+              break;
+            case "subtract":
+              result = subtractMatrices(matrix1, matrix2);
+              break;
+            case "multiply":
+              result = multiplyMatrices(matrix1, matrix2);
+              break;
+            default:
+              break;
+          }
+
+          updateResult(result);
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+
+      addBtn.addEventListener("click", () =>
+        calculate(matrix1Input.value, matrix2Input.value, "add")
+      );
+      subtractBtn.addEventListener("click", () =>
+        calculate(matrix1Input.value, matrix2Input.value, "subtract")
+      );
+      multiplyBtn.addEventListener("click", () =>
+        calculate(matrix1Input.value, matrix2Input.value, "multiplication")
+      );
+    </script>
+  </body>
+</html>
