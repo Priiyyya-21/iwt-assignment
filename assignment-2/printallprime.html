@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Prime Number</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+      }
+
+      label,
+      input[type="number"] {
+        margin: 10px;
+      }
+
+      #prime-list {
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: black;
+        color: white;
+        cursor: pointer;
+        margin: 13px;
+      }
+
+      button:hover {
+        background: gray;
+      }
+      input[type="number"] {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Prime Numbers Between Two Numbers</h1>
+    <label for="first-number">Start range: </label>
+    <input
+      type="number"
+      id="first-number"
+      placeholder="Enter starting range: "
+    />
+    <label for="second-number">End range:</label>
+    <input type="number" id="second-number" placeholder="Enter ending range:" />
+    <button id="display-button">Display</button>
+    <ul id="prime-list"></ul>
+
+    <script>
+      const firstNumber = document.getElementById("first-number");
+      const secondNumber = document.getElementById("second-number");
+      const displayButton = document.getElementById("display-button");
+      const primeList = document.getElementById("prime-list");
+
+      const isPrime = (num) => {
+        if (num <= 1) return false;
+        for (let i = 2; i < num; i++) {
+          if (num % i === 0) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      displayButton.addEventListener("click", () => {
+        primeList.innerHTML = "";
+        const start = Math.min(
+          Number(firstNumber.value),
+          Number(secondNumber.value)
+        );
+        const end = Math.max(
+          Number(firstNumber.value),
+          Number(secondNumber.value)
+        );
+        for (let i = start; i <= end; i++) {
+          if (isPrime(i)) {
+            const li = document.createElement("li");
+            li.textContent = i + " , ";
+            primeList.appendChild(li);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
