@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question10</title>
+    <style>
+      body {
+        text-align: center;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        margin: 10px;
+        padding: 5px;
+      }
+
+      input[type="button"] {
+        margin: 10px;
+        padding: 4px;
+        border-radius: 5px;
+        border: 1px solid green;
+        background-color: white;
+      }
+
+      input[type="button"]:hover {
+        background-color: green;
+        color: white;
+      }
+
+      #result {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Vector Operations</h1>
+      <label>Enter elements (separated by space):</label>
+      <input type="text" id="input" />
+    </div>
+    <input type="button" id="avgbtn" value="Average" />
+    <input type="button" id="sumbtn" value="Sum" />
+    <input type="button" id="productbtn" value="Product" />
+    <input type="button" id="maxbtn" value="Max" />
+    <input type="button" id="minbtn" value="Min" />
+    <div id="result"></div>
+
+    <script>
+      const input = document.getElementById("input");
+      const avgBtn = document.getElementById("avgbtn");
+      const sumBtn = document.getElementById("sumbtn");
+      const productBtn = document.getElementById("productbtn");
+      const maxBtn = document.getElementById("maxbtn");
+      const minBtn = document.getElementById("minbtn");
+      const result = document.getElementById("result");
+
+      var vector = [];
+      var currNum = "";
+      for (var i = 0; i < input.value.length; i++) {
+        if (input.value[i] !== " ") currNum += input.value[i];
+        else {
+          vector.push(parseInt(currNum));
+          currNum = "";
+        }
+      }
+      if (currNum !== "") vector.push(parseInt(currNum));
+
+      avgBtn.addEventListener("click", () => {
+        const avg = vector.reduce((acc, val) => acc + val, 0) / vector.length;
+        result.innerHTML = `<br>Average: ${avg}`;
+      });
+
+      sumBtn.addEventListener("click", () => {
+        const sum = vector.reduce((acc, val) => acc + val, 0);
+        result.innerHTML = `<br>Sum: ${sum}`;
+      });
+
+      productBtn.addEventListener("click", () => {
+        const product = vector.reduce((acc, val) => acc * val, 1);
+        result.innerHTML = `<br>Product: ${product}`;
+      });
+
+      maxBtn.addEventListener("click", () => {
+        const max = vector.reduce(
+          (acc, val) => (val > acc ? val : acc),
+          Number.MIN_SAFE_INTEGER
+        );
+        result.innerHTML = `<br>Max: ${max}`;
+      });
+
+      minBtn.addEventListener("click", () => {
+        const min = vector.reduce(
+          (acc, val) => (val < acc ? val : acc),
+          Number.MAX_SAFE_INTEGER
+        );
+        result.innerHTML = `<br>Min: ${min}`;
+      });
+    </script>
+  </body>
+</html>

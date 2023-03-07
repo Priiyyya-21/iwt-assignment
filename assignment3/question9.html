@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question9</title>
+    <style>
+      .pages {
+        text-align: center;
+        margin: 20px;
+      }
+
+      .pages li {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        background-color: transparent;
+        color: black;
+      }
+
+      .pages li.selected {
+        background-color: lightgreen;
+        color: white;
+      }
+
+      .pages li:hover {
+        background-color: #ccc;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pages">
+      <ul>
+        <li class="selected">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+    </div>
+    <script>
+      window.onload = function () {
+        var paginator = document.querySelector(".pages");
+        var windowWidth = window.innerWidth;
+        var paginatorWidth = paginator.offsetWidth;
+        var leftMargin = (windowWidth - paginatorWidth) / 2;
+        paginator.style.marginLeft = leftMargin + "px";
+      };
+    </script>
+  </body>
+</html>
