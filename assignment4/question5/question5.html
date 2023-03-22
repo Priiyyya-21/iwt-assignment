@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question5</title>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Cascading Dropdown</h1>
+      <div class="sub">
+        <label for="subject">Subject:</label>
+        <select id="subject" onchange="populateTopics()">
+          <option value="">Select a subject</option>
+          <option value="frontend">Front-end</option>
+          <option value="backend">Back-end</option>
+        </select>
+      </div>
+
+      <div class="topic">
+        <label for="topic">Topic:</label>
+        <select id="topic" onchange="populateChapters()">
+          <option value="">Select a topic</option>
+        </select>
+      </div>
+
+      <div class="chapter">
+        <label for="chapter">Chapter:</label>
+        <select id="chapter">
+          <option value="">Select a chapter</option>
+        </select>
+      </div>
+      <div class="but">
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      const chapters = {
+        frontend: {
+          html: ["Links", "Images", "Tables", "Lists"],
+          css: ["Borders", "Margins", "Backgrounds"],
+          javascript: ["Variables", "Operators", "Arrays", "Objects"],
+        },
+        backend: {
+          nodejs: ["NPM", "HTTP", "Express"],
+          php: ["Strings", "Arrays", "Regex"],
+        },
+      };
+
+      function populateOptions(selectElement, options) {
+        selectElement.innerHTML = "<option value=''>Select an option</option>";
+        options.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = option.toLowerCase();
+          optionElement.text = option;
+          selectElement.appendChild(optionElement);
+        });
+      }
+
+      function populateTopics() {
+        const subjectElement = document.getElementById("subject");
+        const topicElement = document.getElementById("topic");
+        const chapterElement = document.getElementById("chapter");
+        const selectedSubject = subjectElement.value.toLowerCase();
+        const selectedChapters = chapters[selectedSubject];
+        if (selectedSubject === "") {
+          populateOptions(topicElement, []);
+          populateOptions(chapterElement, []);
+          return;
+        }
+        const topics = Object.keys(selectedChapters);
+        populateOptions(topicElement, topics);
+        populateOptions(chapterElement, []);
+      }
+
+      function populateChapters() {
+        const subjectElement = document.getElementById("subject");
+        const topicElement = document.getElementById("topic");
+        const chapterElement = document.getElementById("chapter");
+        const selectedSubject = subjectElement.value.toLowerCase();
+        const selectedTopic = topicElement.value.toLowerCase();
+        const selectedChapters = chapters[selectedSubject][selectedTopic];
+        populateOptions(chapterElement, selectedChapters);
+      }
+    </script>
+  </body>
+</html>

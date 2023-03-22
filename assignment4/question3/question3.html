@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question 3</title>
+  </head>
+  <body>
+    <div class="cont">
+      <div class="input">
+        <label for="item">Item :</label>
+        <input type="text" id="item" placeholder="Enter item name" />
+        <label for="price">Price :</label>
+        <input type="number" id="price" placeholder="Enter price" />
+      </div>
+      <button onclick="addItem()" class="add">Add</button>
+    </div>
+    <div class="table">
+      <table id="list">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody id="list-body">
+          <tr>
+            <td>Total</td>
+            <td id="total-price">0</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      let groceryList = [];
+      var price = 0;
+      function addItem() {
+        let item = document.getElementById("item").value;
+        let price = parseInt(document.getElementById("price").value);
+        if (item && price) {
+          let row = document.createElement("tr");
+          let itemCol = document.createElement("td");
+          let priceCol = document.createElement("td");
+          let deleteCol = document.createElement("td");
+          let deleteBtn = document.createElement("button");
+          itemCol.textContent = item;
+          priceCol.textContent = price;
+          deleteBtn.textContent = "Delete";
+          deleteBtn.onclick = function () {
+            deleteItem(row, price);
+          };
+          row.appendChild(itemCol);
+          row.appendChild(priceCol);
+          deleteCol.appendChild(deleteBtn);
+          row.appendChild(deleteCol);
+          document
+            .getElementById("list-body")
+            .insertBefore(row, document.getElementById("list-body").lastChild);
+          groceryList.push({ item: item, price: price });
+          updateTotalPrice(price);
+          document.getElementById("item").value = "";
+          document.getElementById("price").value = "";
+        }
+      }
+
+      function deleteItem(row, price) {
+        let index = Array.prototype.indexOf.call(
+          document.getElementById("list-body").children,
+          row
+        );
+        document.getElementById("list-body").deleteRow(index);
+        groceryList.splice(index - 1, 1);
+        updateTotalPrice(-price);
+      }
+      function updateTotalPrice(price = 0) {
+        let totalPrice = parseInt(
+          document.getElementById("total-price").textContent
+        );
+        totalPrice += price;
+        document.getElementById("total-price").textContent = totalPrice;
+      }
+    </script>
+  </body>
+</html>
