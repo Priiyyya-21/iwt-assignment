@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question4</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Password Validation</h1>
+      <form onsubmit="return validatePassword()">
+        <input type="text" id="name" name="name" placeholder="Name" required />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          type="password"
+          id="repeat-password"
+          name="repeat-password"
+          placeholder="Repeat Password"
+          required
+        /><br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Gmail"
+          required
+        />
+        <input type="date" id="dob" name="dob" placeholder="DOB" required />
+        <div class="button">
+          <button type="button" onclick="checkPassword()">
+            Check Password
+          </button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <div id="message"></div>
+    </div>
+    <script>
+      function validatePassword() {
+        const passwordInput = document.getElementById("password");
+        const repeatPasswordInput = document.getElementById("repeat-password");
+        const messageDiv = document.getElementById("message");
+        let message = "";
+
+        if (passwordInput.value !== repeatPasswordInput.value) {
+          message += "Passwords do not match<br>";
+        }
+
+        if (passwordInput.value.length < 8) {
+          message += "Password must be at least 8 characters long<br>";
+        }
+
+        if (!/\d/.test(passwordInput.value)) {
+          message += "Password must contain at least one digit<br>";
+        }
+
+        if (!/[A-Z]/.test(passwordInput.value)) {
+          message += "Password must contain at least one uppercase letter<br>";
+        }
+
+        if (!/[a-z]/.test(passwordInput.value)) {
+          message += "Password must contain at least one lowercase letter<br>";
+        }
+
+        messageDiv.innerHTML = message;
+        messageDiv.className = "error";
+
+        return message === "Oyee Hoyee!";
+      }
+
+      function checkPassword() {
+        const passwordInput = document.getElementById("password");
+        const repeatPasswordInput = document.getElementById("repeat-password");
+        const messageDiv = document.getElementById("message");
+        let message = `Password: ${passwordInput.value}<br>Repeat Password: ${repeatPasswordInput.value}`;
+
+        messageDiv.className = "success";
+        messageDiv.innerHTML = message;
+      }
+    </script>
+  </body>
+</html>
