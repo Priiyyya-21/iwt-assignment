@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      .progress-bar {
+        height: 20px;
+        background-color: #ddd;
+        position: relative;
+        margin-bottom: 20px;
+      }
+      .progress {
+        height: 100%;
+        background-color: #00eeff;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+      .options {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .options li {
+        margin-bottom: 10px;
+      }
+      .btn {
+        display: block;
+        background-color: #00a0ab;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin: 0 auto;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #717871;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Trivia Quiz</h1>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <form id="quiz-form">
+        <div class="question-container"></div>
+        <button type="submit" class="btn" id="next-btn">Next</button>
+      </form>
+    </div>
+    <script>
+      const quizData = [
+        {
+          question:
+            "The Ganga is the largest river in India. From what does it originate?",
+          options: [
+            "Gangotri Glacier",
+            "Yamunotri Glacier",
+            "Gandak stream",
+            "Yamuna River",
+          ],
+          answer: "Gangotri Glacier",
+        },
+        {
+          question:
+            "What is the name of the largest district in India in terms of area?",
+          options: ["Bastar", "Kutch", "Gandhinagar", "Ahmednagar"],
+          answer: "Kutch",
+        },
+        {
+          question: "What is the highest dam in India?",
+          options: ["Tehri", "Bhakra Nangal", "Hirakud", "Nagarjuna Sagar"],
+          answer: "Tehri",
+        },
+        {
+          question:
+            "One of the seven wonders of the modern world, the Taj Mahal is located where?",
+          options: ["Agra", "New Delhi", "Jaipur", "Bangalore"],
+          answer: "Agra",
+        },
+        {
+          question:
+            "When was the Mohandas Karamchand Gandhi, the Father of the Indian nation, assassinated?",
+          options: [
+            "January, 1948",
+            "September, 1948",
+            "August, 1947",
+            "February, 1948",
+          ],
+          answer: "January, 1948",
+        },
+        {
+          question: "What is the capital of India?",
+          options: ["New Delhi", "Mumbai", "Bangalore", "Chennai"],
+          answer: "New Delhi",
+        },
+        {
+          question: "Which state of India is known as the crown of India?",
+          options: ["Jammu and Kashmir", "Uttar Pradesh", "Delhi", "Goa"],
+          answer: "Jammu and Kashmir",
+        },
+        {
+          question:
+            "What city is home to the Tapkeshwar Temple and is the capital of the Northern Indian state of Uttarakhand?",
+          options: ["Dehradun", "Nainital", "Bhimtal", "Mussourie"],
+          answer: "Dehradun",
+        },
+      ];
+
+      const quizForm = document.getElementById("quiz-form");
+      const questionContainer = document.querySelector(".question-container");
+      const nextBtn = document.getElementById("next-btn");
+      const progress = document.querySelector(".progress");
+      const progressBar = document.querySelector(".progress-bar");
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      // Function to load the question and options
+      function loadQuestion() {
+        const questionData = quizData[currentQuestion];
+        const question = questionData.question;
+        const options = questionData.options;
+
+        // Update question container
+        questionContainer.innerHTML = `
+      	<div class="question">${question}</div>
+      	<ul class="options">
+      		${options
+            .map(
+              (option) =>
+                `<li><input type="radio" name="answer" value="${option}">${option}</li>`
+            )
+            .join("")}
+      	</ul>
+      `;
+      }
+
+      // Function to update the progress bar
+      function updateProgress() {
+        const progressPercent = ((currentQuestion + 1) / quizData.length) * 100;
+        progress.style.width = `${progressPercent}%`;
+      }
+
+      // Function to check the answer
+      function checkAnswer() {
+        const selectedOption = document.querySelector(
+          'input[name="answer"]:checked'
+        );
+        if (!selectedOption) {
+          return false;
+        }
+        return selectedOption.value === quizData[currentQuestion].answer;
+      }
+
+      // Function to handle form submission
+      function submitHandler(e) {
+        e.preventDefault();
+        if (checkAnswer()) {
+          score++;
+        }
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuestion();
+          updateProgress();
+        } else {
+          alert(
+            `You have answered ${score} out of ${quizData.length} questions correctly!`
+          );
+        }
+      }
+
+      // Event listener for form submission
+      quizForm.addEventListener("submit", submitHandler);
+
+      // Load the first question
+      loadQuestion();
+      updateProgress();
+    </script>
+  </body>
+</html>
