@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>stopwatch</title>
-    </head>
-    <body>
-        <h1>Stop Watch</h1>
-        
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Watch</title>
+    <style>
+      h1 {
+        rgb: (87, 28, 91);
+      }
+      .watch-design {
+        text-align: center;
+      }
+
+      .button-design {
+        padding: 4px;
+        margin: 10px;
+        box-shadow: 4px 4px 10px rgb(87, 28, 91);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="watch-design">
+      <h1>StopWatch</h1>
+      <h2 id="timer">00:00:00</h2>
+      <button class="button-design" id="startBtn">Start</button>
+      <button class="button-design" id="stopBtn">Stop</button>
+      <button class="button-design" id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+      // Get references to the buttons and timer display
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const timerDisplay = document.getElementById("timer");
+
+      // Initialize variables
+      let startTime;
+      let intervalId;
+
+      // Helper function to format time in hh:mm:ss format
+      function formatTime(time) {
+        const hours = Math.floor(time / (60 * 60 * 1000))
+          .toString()
+          .padStart(2, "0");
+        const minutes = Math.floor((time / (60 * 1000)) % 60)
+          .toString()
+          .padStart(2, "0");
+        const seconds = Math.floor((time / 1000) % 60)
+          .toString()
+          .padStart(2, "0");
+        return `${hours}:${minutes}:${seconds}`;
+      }
+
+      // Event listener for start button
+      startBtn.addEventListener("click", function () {
+        // Set the start time to the current time
+        startTime = Date.now();
+
+        // Start the interval to update the timer display every second
+        intervalId = setInterval(function () {
+          const elapsedTime = Date.now() - startTime;
+          timerDisplay.textContent = formatTime(elapsedTime);
+        }, 1000);
+      });
+
+      // Event listener for stop button
+      stopBtn.addEventListener("click", function () {
+        // Clear the interval so the timer stops updating
+        clearInterval(intervalId);
+      });
+
+      // Event listener for reset button
+      resetBtn.addEventListener("click", function () {
+        // Stop the timer if it's running
+        clearInterval(intervalId);
+
+        // Reset the timer display to 00:00:00
+        timerDisplay.textContent = "00:00:00";
+      });
+    </script>
+  </body>
 </html>
