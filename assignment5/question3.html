@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E commerce</title>
+    <style>
+      .item-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .item-image {
+        width: 100px;
+        margin-right: 20px;
+      }
+
+      .item-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .item-price {
+        font-size: 20px;
+        margin-right: 20px;
+      }
+
+      .item-price-strikethrough {
+        text-decoration: line-through;
+        color: #ccc;
+      }
+
+      .item-discounted-price {
+        font-size: 20px;
+        color: red;
+      }
+
+      .pagination-link {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-right: 10px;
+        background-color: #f0f0f0;
+        color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .pagination-link:hover {
+        background-color: #ccc;
+      }
+
+      .pagination-link.current {
+        background-color: #333;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="items-container"></div>
+    <div id="pagination-links-container"></div>
+
+    <script>
+      // Define your items as an array of objects
+      const items = [
+        {
+          name: "Hyundai Verna",
+          image: "images/verna.png",
+          price: 1000000,
+          discount: 0.1,
+        },
+        {
+          name: "Mahindra Thar",
+          image: "images/thar.png",
+          price: 999000,
+          discount: 0,
+        },
+        {
+          name: "Mahindra Scorpio",
+          image: "images/scorpio.png",
+          price: 1200000,
+          discount: 0.2,
+        },
+        {
+          name: "Maruti Suzuki Baleno",
+          image: "images/baleno.png",
+          price: 656000,
+          discount: 0,
+        },
+        {
+          name: "Renault Kwid",
+          image: "images/kwid.png",
+          price: 470000,
+          discount: 0.15,
+        },
+        {
+          name: "Mercedes Benz G Class",
+          image: "images/mercedes.png",
+          price: 17200000,
+          discount: 0,
+        },
+      ];
+
+      // Define the number of items to display per page
+      const itemsPerPage = 5;
+
+      // Calculate the total number of pages
+      const totalPages = Math.ceil(items.length / itemsPerPage);
+
+      // Set the initial current page
+      let currentPage = 1;
+
+      // Call the displayItems function with the initial current page
+      displayItems(currentPage);
+
+      // Call the displayPaginationLinks function to display the pagination links
+      displayPaginationLinks();
+
+      // Create a function to display items on the page
+      function displayItems(pageNumber) {
+        // Calculate the starting and ending indices for the current page
+        const startIndex = (pageNumber - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        // Get the items to display on the current page
+        const itemsToDisplay = items.slice(startIndex, endIndex);
+
+        // Clear the previous items from the page
+        document.getElementById("items-container").innerHTML = "";
+
+        // Loop through the items
+        itemsToDisplay.forEach((item) => {
+          // Create the item container
+          const itemContainer = document.createElement("div");
+          itemContainer.classList.add("item-container");
+          // Create the item image element
+          const itemImage = document.createElement("img");
+          itemImage.classList.add("item-image");
+          itemImage.src = item.image;
+          itemImage.alt = item.name;
+          itemContainer.appendChild(itemImage);
+
+          // Create the item details container
+          const itemDetailsContainer = document.createElement("div");
+
+          // Create the item name element
+          const itemName = document.createElement("div");
+          itemName.classList.add("item-name");
+          itemName.textContent = item.name;
+          itemDetailsContainer.appendChild(itemName);
+
+          // Create the item price elements
+          const itemPrice = document.createElement("div");
+          itemPrice.classList.add("item-price");
+          itemPrice.textContent = "₹" + item.price.toFixed(2);
+          itemDetailsContainer.appendChild(itemPrice);
+
+          if (item.discount > 0) {
+            // Create the item discounted price element
+            const itemDiscountedPrice = document.createElement("div");
+            itemDiscountedPrice.classList.add("item-discounted-price");
+            itemDiscountedPrice.textContent =
+              "₹" + (item.price * (1 - item.discount)).toFixed(2);
+            itemDetailsContainer.appendChild(itemDiscountedPrice);
+
+            // Create the item price strikethrough element
+            const itemPriceStrikethrough = document.createElement("div");
+            itemPriceStrikethrough.classList.add("item-price-strikethrough");
+            itemPriceStrikethrough.textContent = "₹" + item.price.toFixed(2);
+            itemDetailsContainer.appendChild(itemPriceStrikethrough);
+          }
+
+          itemContainer.appendChild(itemDetailsContainer);
+
+          // Append the item container to the items container
+          document.getElementById("items-container").appendChild(itemContainer);
+        });
+      }
+
+      // Create a function to display the pagination links
+      function displayPaginationLinks() {
+        // Clear the previous pagination links from the page
+        document.getElementById("pagination-links-container").innerHTML = "";
+
+        // Loop through the total number of pages to create a pagination link for each page
+        for (let i = 1; i <= totalPages; i++) {
+          // Create the pagination link element
+          const paginationLink = document.createElement("a");
+          paginationLink.classList.add("pagination-link");
+          paginationLink.href = "#";
+          paginationLink.textContent = i;
+
+          // Set the current page link to be active
+          if (i === currentPage) {
+            paginationLink.classList.add("current");
+          }
+
+          // Add an event listener to the pagination link to call the displayItems function with the corresponding page number
+          paginationLink.addEventListener("click", function () {
+            currentPage = i;
+            displayItems(currentPage);
+
+            // Update the active page link
+            const currentPaginationLink = document.querySelector(
+              ".pagination-link.current"
+            );
+            currentPaginationLink.classList.remove("current");
+            paginationLink.classList.add("current");
+          });
+
+          // Append the pagination link to the pagination links container
+          document
+            .getElementById("pagination-links-container")
+            .appendChild(paginationLink);
+        }
+      }
+    </script>
+  </body>
+</html>
